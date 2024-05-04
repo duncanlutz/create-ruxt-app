@@ -1,0 +1,45 @@
+[
+    {
+        "type": "folder",
+        "name": "src",
+        "children": [
+            {
+                "type": "folder",
+                "name": "pages",
+                "children": [
+                    {
+                        "type": "file",
+                        "name": "index.rs",
+                        "content": "use actix_web::{HttpResponse, Responder, web};\nuse tera::{Context, Tera};\n\npub async fn page(tera: web::Data<Tera>) -> Result<impl Responder, actix_web::Error> {\n    let context = Context::new();\n    let rendered = tera.render(\"index.html\", &context).map_err(|e| {\n        eprintln!(\"Failed to render index.html: {}\", e);\n        actix_web::error::ErrorInternalServerError(\"Failed to render index.html\")\n    })?;\n\n    Ok(HttpResponse::Ok().body(rendered))\n}"
+                    },
+                    {
+                        "type": "file",
+                        "name": "mod.rs",
+                        "content": "pub mod index;"
+                    }
+                ]
+            },
+            {
+                "type": "file",
+                "name": "main.rs",
+                "content": "use actix_web::{web, App, HttpServer};\n\nmod pages;\n\n#[ruxt::main]\nasync fn main() -> std::io::Result<()> {\n    let tera = tera::Tera::new(\"templates/**/*\").expect(\"Failed to compile templates\");\n    HttpServer::new(move || App::new().app_data(web::Data::new(tera.clone())))\n        .bind((\"0.0.0.0\", 8080))?\n        .run()\n        .await\n}"
+            }
+        ]
+    },
+    {
+        "type": "folder",
+        "name": "templates",
+        "children": [
+            {
+                "type": "file",
+                "name": "index.html",
+                "content": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link rel=\"stylesheet\" href=\"https://cdn.curlwind.com?classes=flex,flex-col,items-center,justify-center,min-h-screen,mt-4,text-4xl\">\n    <title>Ruxt App</title>\n</head>\n\n <body class=\"flex flex-col items-center justify-center min-h-screen\">\n    <h1 class=\"text-4xl\">This is a Ruxt App</h1>\n    <p class=\"mt-4\">Welcome to your new Ruxt app! Visit <a href=\"https://ruxt.rs\">ruxt.rs</a> to learn more.</p>\n</body>\n\n</html>"
+            }
+        ]
+    },
+    {
+        "type": "file",
+        "name": "Cargo.toml",
+        "content": "[package]\nname = \"{name}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\nruxt = \"0.1.0\"\nactix-web = \"4.5.1\"\ntera = \"1.19.1\"\n"
+    }
+]
