@@ -3,8 +3,11 @@ name = "create-ruxt-app"
 version = "0.1.0"
 edition = "2021"
 description = "Create a new Ruxt app"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+repository = "https://github.com/duncanlutz/create-ruxt-app"
+homepage = "https://ruxt.rs"
+readme = "README.md"
+keywords = ["ruxt", "actix", "developer-tools", "cli", "web"]
+categories = ["web-programming", "development-tools"]
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }
