@@ -2,6 +2,7 @@
 name = "create-ruxt-app"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
 description = "Create a new Ruxt app"
 repository = "https://github.com/duncanlutz/create-ruxt-app"
 homepage = "https://ruxt.rs"
