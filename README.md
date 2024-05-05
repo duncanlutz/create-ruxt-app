@@ -8,7 +8,7 @@ cargo install create-ruxt-app
 
 ## Usage
 ```bash
-cargo create-ruxt-app {my-app}
+create-ruxt-app {my-app}
 ```
 
 ## License
