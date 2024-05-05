@@ -1,13 +1,14 @@
 use env_extract::{ConfigStruct, EnvVar};
 
-#[derive(EnvVar)]
+#[derive(EnvVar, Debug)]
 pub enum Environment {
-    #[default]
     Development,
+
+    #[default]
     Production,
 }
 
-#[derive(ConfigStruct)]
+#[derive(ConfigStruct, Debug)]
 pub struct Config {
     #[enumerated]
     pub environment: Environment,

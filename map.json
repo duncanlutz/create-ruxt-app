@@ -10,7 +10,7 @@
                     {
                         "type": "file",
                         "name": "index.rs",
-                        "content": "use actix_web::{HttpResponse, Responder, web};\nuse tera::{Context, Tera};\n\npub async fn page(tera: web::Data<Tera>) -> Result<impl Responder, actix_web::Error> {\n    let context = Context::new();\n    let rendered = tera.render(\"index.html\", &context).map_err(|e| {\n        eprintln!(\"Failed to render index.html: {}\", e);\n        actix_web::error::ErrorInternalServerError(\"Failed to render index.html\")\n    })?;\n\n    Ok(HttpResponse::Ok().body(rendered))\n}"
+                        "content": "use actix_web::{HttpResponse, Responder, web};\nuse tera::{Context, Tera};\n\npub async fn get(tera: web::Data<Tera>) -> Result<impl Responder, actix_web::Error> {\n    let context = Context::new();\n    let rendered = tera.render(\"index.html\", &context).map_err(|e| {\n        eprintln!(\"Failed to render index.html: {}\", e);\n        actix_web::error::ErrorInternalServerError(\"Failed to render index.html\")\n    })?;\n\n    Ok(HttpResponse::Ok().body(rendered))\n}"
                     },
                     {
                         "type": "file",
