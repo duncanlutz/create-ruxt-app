@@ -1,6 +1,7 @@
 use env_extract::{ConfigStruct, EnvVar};
 
 #[derive(EnvVar, Debug)]
+#[case(convert = "lowercase")]
 pub enum Environment {
     Development,
 
